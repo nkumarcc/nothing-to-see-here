@@ -1,3 +1,16 @@
 ## Design Choices
 
 1. Used `reactstrap` for the frontend, faster writing and light imlpementation for a nice UI.
+
+### Ideas
+
+- Add sassy remark that dynamically updates
+- Upload your own PDF
+- Merge React into Rails (like how I think the project was supposed to be done)
+- Cache that updates itself
+- Multi-message conversations (https://platform.openai.com/docs/api-reference/chat/create#chat/create-messages)
+- OpenAI integrated with generating a result (function calls? https://platform.openai.com/docs/api-reference/chat/create#chat/create-function_call)
+  - Also, using OpenAI files instead of and/or alongside embeddings file (https://platform.openai.com/docs/api-reference/files)
+- Consume as a stream (https://platform.openai.com/docs/api-reference/chat/create#chat/create-stream)
+- Image creation
+- Mess with Ruby Langchain (https://github.com/andreibondarev/langchainrb)

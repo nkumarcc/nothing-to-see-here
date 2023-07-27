@@ -4,14 +4,14 @@ import './styles/AskBookForm.scss';
 import axios from 'axios';
 
 const AskBookForm: React.FC = () => {
+  const [answer, setAnswer] = useState('');
 
   const handleAsk = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('form submitted with val: ', event.currentTarget.bookQuestion.value);
     const response = await axios.post('/ask', {
       question: event.currentTarget.bookQuestion.value
     });
-    console.log('form responded with the first letter! It\'s: ', response.data.answer);
+    setAnswer(response.data.answer)
   }
 
   const handleFeelingLucky = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -21,17 +21,45 @@ const AskBookForm: React.FC = () => {
     console.log('feeling lucky response', response.data);
   }
 
+  const handleAnotherQuestion = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    setAnswer('');
+  }
+
+  function renderButtonsAndAnswer() {
+    if (answer) {
+      return (
+        <div className="text-start">
+          <Row className="mt-3">
+            <Col>
+              <h3>{answer}</h3>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            <Col>
+              <Button type="button" onClick={handleAnotherQuestion}>Ask another question</Button>
+            </Col>
+          </Row>
+        </div>
+      )
+    } else {
+      return (
+        <Row className="mt-3">
+          <Col>
+            <Button type="submit" className="me-1">Ask Question</Button>
+            <Button type="button" className="ms-1" onClick={handleFeelingLucky}>I'm Feeling Lucky</Button>
+          </Col>
+        </Row>
+      )
+    }
+  }
+
   return (
     <Form className="askBookFormContainer" onSubmit={handleAsk}>
       <Row>
         <Input name="bookQuestion" type="textarea" />
       </Row>
-      <Row className="mt-3">
-        <Col>
-          <Button type="submit" className="me-1">Ask Question</Button>
-          <Button type="button" className="ms-1" onClick={handleFeelingLucky}>I'm Feeling Lucky</Button>
-        </Col>
-      </Row>
+      {renderButtonsAndAnswer()}
     </Form>
   );
 };
