@@ -1,20 +1,25 @@
 import React, { useState } from "react";
-import { Button, Col, Input, Row } from 'reactstrap';
+import { Button, Col, Form, Input, Row } from 'reactstrap';
 
 const AskBookForm: React.FC = () => {
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('form submitted with val: ', event.currentTarget.bookQuestion.value);
+  }
+
   return (
-    <form>
+    <Form onSubmit={handleSubmit}>
       <Row>
-        <Input type="textarea" />
+        <Input name="bookQuestion" type="textarea" />
       </Row>
       <Row className="mt-3">
         <Col>
-          <Button className="mx-1">Ask Question</Button>
-          <Button>I'm Feeling Lucky</Button>
+          <Button type="submit" className="mx-1">Ask Question</Button>
+          <Button type="button">I'm Feeling Lucky</Button>
         </Col>
       </Row>
-    </form>
+    </Form>
   );
 };
 
