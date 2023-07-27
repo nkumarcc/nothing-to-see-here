@@ -1,6 +1,7 @@
 ## Design Choices
 
 1. Used `reactstrap` for the frontend, faster writing and light imlpementation for a nice UI.
+2. Used `ruby-openai` for the integration with OpenAI. It's the most mature library.
 
 ### Ideas
 
