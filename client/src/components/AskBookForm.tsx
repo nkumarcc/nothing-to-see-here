@@ -8,15 +8,17 @@ const AskBookForm: React.FC = () => {
   const handleAsk = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('form submitted with val: ', event.currentTarget.bookQuestion.value);
-    const response = await axios.post('/api/ask', {
+    const response = await axios.post('/ask', {
       question: event.currentTarget.bookQuestion.value
     });
+    console.log('form responded with the first letter! It\'s: ', response.data.answer);
   }
 
   const handleFeelingLucky = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     console.log('feeling lucky button clicked');
-    const response = await axios.get('/api/feeling-lucky');
+    const response = await axios.get('/feeling-lucky');
+    console.log('feeling lucky response', response.data);
   }
 
   return (
