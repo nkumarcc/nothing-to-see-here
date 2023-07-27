@@ -1,25 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AskBookForm from './components/AskBookForm';
+import { Container } from 'reactstrap';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <h1>Ask My Book</h1>
+      <p>This is my product engineering challenge to prove that I am indeed worthy.</p>
+      <AskBookForm />
+    </Container>
+
   );
 }
 
