@@ -5,20 +5,33 @@ import axios from 'axios';
 
 const AskBookForm: React.FC = () => {
   const [answer, setAnswer] = useState('');
+  const [bookQuestion, setBookQuestion] = useState('');
+
+  function handleBookQuestionEdit(event: React.ChangeEvent<HTMLInputElement>) {
+    setBookQuestion((prev) => event.target.value);
+  }
 
   const handleAsk = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response = await axios.post('/ask', {
       question: event.currentTarget.bookQuestion.value
     });
-    setAnswer(response.data.answer)
+    setAnswer(response.data.answer);
   }
 
   const handleFeelingLucky = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    console.log('feeling lucky button clicked');
-    const response = await axios.get('/feeling-lucky');
-    console.log('feeling lucky response', response.data);
+    const options = [
+      'What is a minimalist entrepreneur?',
+      'What is your definition of community?',
+      'How do I decide what kind of business I should start?'
+    ],
+    random = ~~(Math.random() * options.length);
+    setBookQuestion(options[random]);
+    const response = await axios.post('/ask', {
+      question: options[random]
+    });
+    setAnswer(response.data.answer);
   }
 
   const handleAnotherQuestion = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -57,7 +70,7 @@ const AskBookForm: React.FC = () => {
   return (
     <Form className="askBookFormContainer" onSubmit={handleAsk}>
       <Row>
-        <Input name="bookQuestion" type="textarea" />
+        <Input name="bookQuestion" value={bookQuestion} onChange={handleBookQuestionEdit} type="textarea" />
       </Row>
       {renderButtonsAndAnswer()}
     </Form>

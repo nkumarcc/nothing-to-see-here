@@ -20,10 +20,6 @@ class AskController < ApplicationController
         render json: { answer: 'No response.' }
     end
 
-    def lucky
-        render json: { answer: "Here's a super lucky answer." }
-    end
-
     private
     def openai_client
         @openai_client ||= OpenAI::Client.new()
