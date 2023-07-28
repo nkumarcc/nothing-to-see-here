@@ -50,8 +50,8 @@ def get_embedding(text, open_ai, model)
 end
 
 doc_embeddings = {}
-df.map_rows.with_index do |row, index|
-    doc_embeddings[index] = get_embedding(row['content'], open_ai, DOC_EMBEDDINGS_MODEL)
+df.map_rows do |row|
+    doc_embeddings[row['title']] = get_embedding(row['content'], open_ai, DOC_EMBEDDINGS_MODEL)
 end
 
 CSV.open("./outputs/#{output_name}.embeddings.csv", 'w') do |csv|
@@ -60,6 +60,6 @@ CSV.open("./outputs/#{output_name}.embeddings.csv", 'w') do |csv|
     if embedding.nil?
         next
     end
-    csv << ["Page #{page}"] + embedding
+    csv << [page] + embedding
   end
 end

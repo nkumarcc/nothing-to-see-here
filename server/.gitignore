@@ -10,6 +10,7 @@ capybara-*.html
 *.orig
 rerun.txt
 pickle-email-*.html
+/app/assets
 
 # Ignore all logfiles and tempfiles.
 /log/*
