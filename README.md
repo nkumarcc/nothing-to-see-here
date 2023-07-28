@@ -6,6 +6,7 @@
   1. Implementations/integrations of HuggingFace tokenizers (what I used, used the one from Sahil's implementation as MVP): https://github.com/ankane/tokenizers-ruby
   2. A different one trained just for Bing: https://github.com/ankane/blingfire-ruby
   3. I actually tried this guy out: https://github.com/ankane/youtokentome-ruby, I think it required training (no pre-trains) so had to opt with the HuggingFace one.
+4. Generally for models, using `-ada-`, the `-002` models for embeddings, and `gpt-turbo-3.5` for completions. Seems like original project was made before these alternatives were set as the defaults.
 
 ### Ideas
 

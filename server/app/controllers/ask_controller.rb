@@ -1,4 +1,5 @@
 require "openai"
+require "prompt_and_embedding_utils"
 
 class AskController < ApplicationController
     rescue_from ActionController::ParameterMissing do |exception|
@@ -7,15 +8,14 @@ class AskController < ApplicationController
 
     def ask 
         question = params.require(:question)
-        response = openai_client.completions(
-            parameters: {
-            model: "text-davinci-003",
-            prompt: question,
-            max_tokens: 2000
-        })
-        if !response.nil? && response.key?('choices') && response['choices'].is_a?(Array) && response['choices'].length > 0
-            render json: { answer: response['choices'][0]['text'] }
-            return
+
+        # Check if question previously asked / vector similarity to a recent previous question
+        # If so, return the same answer
+
+        response = PromptAndEmbeddingUtils.get_completion_for_question(question, openai_client)
+
+        if !response.nil?
+            return render json: { answer: response }
         end
         render json: { answer: 'No response.' }
     end
