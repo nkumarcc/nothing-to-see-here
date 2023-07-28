@@ -107,7 +107,6 @@ module PromptAndEmbeddingUtils
     def self.get_completion_for_question(question, open_ai)
         ordered_pages = get_pages_ordered_by_score(question, PAGE_EMBEDDINGS, open_ai)
         prompt = build_prompt(question, ordered_pages, open_ai)
-        puts prompt
         completion = open_ai.chat(
             parameters: {
                 model: COMPLETIONS_MODEL,
@@ -118,7 +117,6 @@ module PromptAndEmbeddingUtils
                 temperature: 0.0,
             }
         )
-        puts completion
         return completion.dig("choices", 0, "message", "content")
     end
 end
