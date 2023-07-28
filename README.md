@@ -7,6 +7,8 @@
   2. A different one trained just for Bing: https://github.com/ankane/blingfire-ruby
   3. I actually tried this guy out: https://github.com/ankane/youtokentome-ruby, I think it required training (no pre-trains) so had to opt with the HuggingFace one.
 4. Generally for models, using `-ada-`, the `-002` models for embeddings, and `gpt-turbo-3.5` for completions. Seems like original project was made before these alternatives were set as the defaults.
+5. Shifted to using the `/chat/completions` API instead of `/completions`. Completions was deprecated as newer models ideal for chat should also handle completions with correct prompt engineering. However, I've largely used the original prompt from Sahil's website, yet to see how effective it's going to be. So far looks good to me.
+6. I modified the prompt to be a little more aligned with how OpenAI suggests identifying context.
 
 ### Ideas
 
