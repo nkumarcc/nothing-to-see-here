@@ -1,5 +1,5 @@
 require "matrix"
-require "CSV"
+require "csv"
 require "openai"
 
 EMBEDDING_MODEL = ENV.fetch("EMBEDDING_MODEL")
