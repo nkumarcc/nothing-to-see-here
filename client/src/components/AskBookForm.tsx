@@ -45,7 +45,7 @@ const AskBookForm: React.FC = () => {
         <div className="text-start">
           <Row className="mt-3">
             <Col>
-              <h3>{answer}</h3>
+              <p>{answer}</p>
             </Col>
           </Row>
           <Row className="mt-3">
