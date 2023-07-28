@@ -14,7 +14,7 @@ open_ai = OpenAI::Client.new()
 DOC_EMBEDDINGS_MODEL = "text-search-curie-doc-001"
 
 if ARGV.length < 1
-  puts "Usage: ruby scripts/create_embeddings.rb <path_to_pdf>"
+  puts "Usage: ruby scripts/create_embeddings_pdf.rb <path_to_pdf>"
   exit
 end
 
@@ -22,7 +22,7 @@ filename = ARGV[0]
 
 if !ARGV[0].end_with?(".pdf")
     puts "Argument is not a pdf file."
-    puts "Usage: ruby scripts/create_embeddings.rb <path_to_pdf>"
+    puts "Usage: ruby scripts/create_embeddings_pdf.rb <path_to_pdf>"
     exit
 end
 
