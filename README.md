@@ -10,6 +10,8 @@
 5. Shifted to using the `/chat/completions` API instead of `/completions`. Completions was deprecated as newer models ideal for chat should also handle completions with correct prompt engineering. However, I've largely used the original prompt from Sahil's website, yet to see how effective it's going to be. So far looks good to me.
 6. I modified the prompt to be a little more aligned with how OpenAI suggests identifying context.
 
+Nominal change for Heroku.
+
 ### Ideas
 
 - Add sassy remark that dynamically updates
