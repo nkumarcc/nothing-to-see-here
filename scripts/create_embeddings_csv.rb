@@ -9,27 +9,33 @@ OpenAI.configure do |config|
 end
 
 open_ai = OpenAI::Client.new()
-DOC_EMBEDDINGS_MODEL = "text-search-curie-doc-001"
 
 if ARGV.length < 2
-  puts "Usage: ruby scripts/create_embeddings_csv.rb <path_to_csv> <output_name>"
+  puts "Usage: ruby scripts/create_embeddings_csv.rb <path_to_csv> <output_name> " +
+    "<optional: embeddings_model> <optional: max_input_tokens> <optional: output_dimensions>"
   exit
 end
 
 if !ARGV[0].end_with?(".csv")
     puts "Argument is not a csv file."
-    puts "Usage: ruby scripts/create_embeddings_csv.rb <path_to_csv> <output_name>"
+    puts "Usage: ruby scripts/create_embeddings_csv.rb <path_to_csv> <output_name>" +
+      "<optional: embeddings_model> <optional: max_input_tokens> <optional: output_dimensions>"
     exit
 end
 
 if ARGV[1].end_with?(".csv")
     puts "Argument has the csv extension alread, we just want a key name."
-    puts "Usage: ruby scripts/create_embeddings_csv.rb <path_to_csv> <output_name>"
+    puts "Usage: ruby scripts/create_embeddings_csv.rb <path_to_csv> <output_name>" +
+      "<optional: embeddings_model> <optional: max_input_tokens> <optional: output_dimensions>"
     exit
 end
 
 filename = ARGV[0]
 output_name = ARGV[1]
+DOC_EMBEDDINGS_MODEL = ARGV[2] || "text-embedding-ada-002"
+MAX_INPUT_TOKENS = ARGV[3] || 8191
+OUTPUT_DIMENSIONS = ARGV[4] || 1536
+
 
 df = Daru::DataFrame.from_csv(filename)
 
@@ -49,7 +55,7 @@ df.map_rows.with_index do |row, index|
 end
 
 CSV.open("./outputs/#{output_name}.embeddings.csv", 'w') do |csv|
-  csv << ["title"] + (0...4096).to_a
+  csv << ["title"] + (0...OUTPUT_DIMENSIONS).to_a
   doc_embeddings.each do |page, embedding|
     if embedding.nil?
         next
