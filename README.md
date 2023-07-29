@@ -27,7 +27,7 @@ One thing I improved on was handling of out there questions, this one crashed th
 
 I think this is likely the Chat API vs Completion API. I also think while it's better that the chat actually responds to this question, I think we could do better guiding of how to respond to irrelevant questions like this in the prompt. We could also use the bigger prompt window models, though obv for this type of site not worth it.
 
-I also tried making a nicer book and UI but decided not worth for sake of the project.
+I also tried making a nicer book png with Midjourney and UI but decided not worth for sake of the project.
 
 ### Ideas
 
